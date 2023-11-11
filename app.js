@@ -3,6 +3,7 @@ import "dotenv/config"
 
 import indexRouter from "./src/routes/index.route.js"
 import { db } from "./src/db/index.db.js";
+import { info } from "./src/log/logger.js";
 
 try {
     // db.sequelize.authenticate();
@@ -19,7 +20,7 @@ const app = express()
 const PORT = process.env.PORT || 3000
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
+    info(`Server running on port ${PORT}`)
 })
 
 app.use(express.json())
