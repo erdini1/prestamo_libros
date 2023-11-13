@@ -11,3 +11,16 @@ export const HTTP_STATUSES = {
     SERVICE_UNAVAILABLE: 503
 }
 
+export const HTTP_MESSAGES = {
+    [HTTP_STATUSES.OK]: 'OK',
+    [HTTP_STATUSES.CREATED]: 'CREATED',
+    [HTTP_STATUSES.ACCEPTED]: 'ACCEPTED',
+    [HTTP_STATUSES.BAD_REQUEST]: 'Bad Request',
+    [HTTP_STATUSES.UNAUTHORIZED]: 'Unauthorized',
+    [HTTP_STATUSES.FORBIDDEN]: 'Forbidden',
+    [HTTP_STATUSES.NOT_FOUND]: 'Not Found',
+    [HTTP_STATUSES.UNPROCESSABLE_ENTITY]: 'Unprocessable Entity',
+    [HTTP_STATUSES.INTERNAL_SERVER_ERROR]: 'Internal Server Error',
+    [HTTP_STATUSES.SERVICE_UNAVAILABLE]: 'Service unavailable'
+}
+
