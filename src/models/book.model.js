@@ -30,7 +30,11 @@ const Book = (sequelize) => {
     }, { timestamps: true })
 
     Book.associate = function (models) {
-        Book.hasMany(models.Loan, { foreignKey: 'bookId', as: 'loans' })
+        Book.belongsToMany(models.Loan, {
+            through: "LoanBook",
+            foreignKey: 'bookId',
+            as: 'loan',
+        });
     }
     return Book
 }

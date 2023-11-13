@@ -24,8 +24,9 @@ const Loan = (sequelize) => {
             foreignKey: 'userId',
             as: 'owner',
         });
-        Loan.belongsTo(models.Book, {
-            foreignKey: 'bookId',
+        Loan.belongsToMany(models.Book, {
+            through: "LoanBook",
+            foreignKey: 'loanId',
             as: 'book',
         });
         // Loan.hasMany(models.Comment, { foreignKey: 'postId', as: 'comments' })
