@@ -22,6 +22,9 @@ const sequelize = new Sequelize({
     },
     define: {
         timestamps: false,
+    },
+    query: {
+        raw: true
     }
 });
 

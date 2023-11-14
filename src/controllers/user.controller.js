@@ -20,9 +20,8 @@ const createUser = async (req, res, next) => {
 }
 
 const login = async (req, res, next) => {
-    const { email, password } = req.body;
-    const token = await UserService.login(email, password)
     try {
+        const token = await UserService.authentication(req.body)
         res.status(HTTP_STATUSES.OK).json({ JWT: token, info: { email } });
     } catch (error) {
         next(error)

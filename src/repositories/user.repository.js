@@ -9,9 +9,7 @@ const createUser = async (user) => {
 }
 
 const getUserByEmail = async (email) => {
-    const response = await db.User.findOne(
-        { where: { email } });
-    return response.dataValues;
+    return await db.User.findOne({ where: { email } });
 }
 
 export const UserRepository = {
