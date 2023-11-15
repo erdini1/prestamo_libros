@@ -1,4 +1,5 @@
 import { HTTP_STATUSES } from "../constants/http.js"
+import ApiError from "../errors/api.error.js"
 import { UserService } from "../services/user.service.js"
 
 const getAll = async (req, res, next) => {
@@ -30,7 +31,16 @@ const login = async (req, res, next) => {
 
 const modifyUser = async (req, res, next) => {
     try {
-        const data = await UserService.modifyUser(req.body, req.params.id)
+        await UserService.modifyUser(req.body, req.params.id)
+        res.status(HTTP_STATUSES.OK).json({ msg: "User modified successfully" })
+    } catch (error) {
+        next(error)
+    }
+}
+
+const findOneUser = async (req, res, next) => {
+    try {
+        const data = await UserService.findOneUser(req.params.id)
         res.status(HTTP_STATUSES.OK).json(data)
     } catch (error) {
         next(error)
@@ -41,5 +51,6 @@ export const UserController = {
     getAll,
     createUser,
     login,
-    modifyUser
+    modifyUser,
+    findOneUser
 }

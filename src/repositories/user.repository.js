@@ -16,9 +16,14 @@ const modifyUser = async (name, lastName, email, id) => {
     return await db.User.update({ name, lastName, email }, { where: { id } })
 }
 
+const findOneUser = async id => {
+    return await db.User.findOne({ where: { id } })
+}
+
 export const UserRepository = {
     getAllUser,
     createUser,
     getUserByEmail,
-    modifyUser
+    modifyUser,
+    findOneUser
 }

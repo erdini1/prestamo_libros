@@ -46,6 +46,18 @@ const modifyUser = async (body, id) => {
     try {
         const { name, lastName, email } = body
         const data = await UserRepository.modifyUser(name, lastName, email, id)
+        if (data[0] == 0) {
+            throw new ApiError(HTTP_STATUSES.BAD_REQUEST, "User not modified")
+        }
+        return data
+    } catch (error) {
+        throw error
+    }
+}
+
+const findOneUser = async id => {
+    try {
+        const data = await UserRepository.findOneUser(id)
         return data
     } catch (error) {
         throw error
@@ -56,5 +68,6 @@ export const UserService = {
     getAllUser,
     createUser,
     authentication,
-    modifyUser
+    modifyUser,
+    findOneUser
 }

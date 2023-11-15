@@ -20,6 +20,8 @@ export const schemaUser = {
             password: Schemas.PasswordUpdate,
         },
         id: Schemas.Id,
+    }),
+    getOne: Joi.object().keys({
+        id: Schemas.Id
     })
-
 }

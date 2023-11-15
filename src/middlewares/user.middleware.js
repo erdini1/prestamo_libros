@@ -2,9 +2,9 @@ import { HTTP_STATUSES } from "../constants/http.js";
 import ApiError from "../errors/api.error.js";
 import { schemaUser } from "./schemas/user.schema.js";
 
+//VALIDACIONES DE LOS SCHEMAS
 const validateCreateUser = (req, res, next) => {
-    const { error, value } = schemaUser.create.validate(req.body, { abortEarly: false })
-    // TODO: hacerlo una función o algo por el estilo
+    const { error } = schemaUser.create.validate(req.body, { abortEarly: false })
     if (error) {
         const errorMessages = {}
         error.details.forEach(detail => {
@@ -15,11 +15,14 @@ const validateCreateUser = (req, res, next) => {
         next()
     }
 }
-// TODO: modificar los mensajes de abajp
+
 const validateLogin = (req, res, next) => {
-    const { error, value } = schemaUser.login.validate(req.body, { abortEarly: false })
+    const { error } = schemaUser.login.validate(req.body, { abortEarly: false })
     if (error) {
-        const errorMessages = error.details.map(detail => detail.message)
+        const errorMessages = {}
+        error.details.forEach(detail => {
+            errorMessages[detail.context.key] = detail.message;
+        });
         res.status(HTTP_STATUSES.UNPROCESSABLE_ENTITY).json({ messages: errorMessages })
     } else {
         next()
@@ -27,8 +30,7 @@ const validateLogin = (req, res, next) => {
 }
 
 const validateUpdateUser = (req, res, next) => {
-    const { error, value } = schemaUser.update.validate({ body: req.body, id: req.params.id }, { abortEarly: false })
-    // TODO: hacerlo una función o algo por el estilo
+    const { error } = schemaUser.update.validate({ body: req.body, id: req.params.id }, { abortEarly: false })
     if (error) {
         const errorMessages = {}
         error.details.forEach(detail => {
@@ -40,6 +42,20 @@ const validateUpdateUser = (req, res, next) => {
     }
 }
 
+const validateIdUser = (req, res, next) => {
+    const { error } = schemaUser.getOne.validate(req.params, { abortEarly: false })
+    if (error) {
+        const errorMessages = {}
+        error.details.forEach(detail => {
+            errorMessages[detail.context.key] = detail.message;
+        });
+        res.status(HTTP_STATUSES.UNPROCESSABLE_ENTITY).json({ messages: errorMessages })
+    } else {
+        next()
+    }
+}
+
+//MIDDLEWARES GENERALES DE USUARIOS
 // TODO: Aplicar el middleware
 const isAuthenticated = (req, res, next) => {
     let token = req.headers.authorization;
@@ -63,5 +79,6 @@ export const UserMiddleware = {
     isAuthenticated,
     validateCreateUser,
     validateLogin,
-    validateUpdateUser
+    validateUpdateUser,
+    validateIdUser
 }
