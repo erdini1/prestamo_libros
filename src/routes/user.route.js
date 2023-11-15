@@ -7,7 +7,7 @@ const router = express.Router()
 router.get("", UserController.getAll)
 router.post("", UserMiddleware.validateCreateUser, UserController.createUser)
 router.post("/login", UserMiddleware.validateLogin, UserController.login)
-router.put("/:id", UserController.modifyUser)
+router.put("/:id", UserMiddleware.validateUpdateUser, UserController.modifyUser)
 
 
 export default router

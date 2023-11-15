@@ -11,5 +11,15 @@ export const schemaUser = {
     login: Joi.object().keys({
         email: Schemas.Email,
         password: Schemas.Password
+    }),
+    update: Joi.object().keys({
+        body: {
+            name: Schemas.StringUpdate,
+            lastName: Schemas.StringUpdate,
+            email: Schemas.EmailUpdate,
+            password: Schemas.PasswordUpdate,
+        },
+        id: Schemas.Id,
     })
+
 }
