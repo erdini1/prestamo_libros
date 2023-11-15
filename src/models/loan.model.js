@@ -11,9 +11,6 @@ const Loan = (sequelize) => {
         borrowDate: {
             type: DataTypes.DATE,
         },
-        expectedDate: {
-            type: DataTypes.DATE,
-        },
         returnDate: {
             type: DataTypes.DATE,
         }

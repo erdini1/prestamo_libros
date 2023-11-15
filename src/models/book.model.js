@@ -17,7 +17,7 @@ const Book = (sequelize) => {
         genre: {
             type: DataTypes.STRING,
         },
-        paginas: {
+        pages: {
             type: DataTypes.INTEGER,
         },
         summary: {

@@ -13,7 +13,7 @@ const getAll = async (req, res, next) => {
 const createUser = async (req, res, next) => {
     try {
         await UserService.createUser(req.body)
-        return res.status(HTTP_STATUSES.OK).json({ msg: "Usuario creado correctamente" })
+        return res.status(HTTP_STATUSES.OK).json({ msg: "User created successfully" })
     } catch (error) {
         next(error)
     }
@@ -22,7 +22,16 @@ const createUser = async (req, res, next) => {
 const login = async (req, res, next) => {
     try {
         const token = await UserService.authentication(req.body)
-        res.status(HTTP_STATUSES.OK).json({ JWT: token, info: { email } });
+        res.status(HTTP_STATUSES.OK).json({ JWT: token });
+    } catch (error) {
+        next(error)
+    }
+}
+
+const modifyUser = async (req, res, next) => {
+    try {
+        const data = await UserService.modifyUser(req.body, req.params.id)
+        res.status(HTTP_STATUSES.OK).json(data)
     } catch (error) {
         next(error)
     }
@@ -31,5 +40,6 @@ const login = async (req, res, next) => {
 export const UserController = {
     getAll,
     createUser,
-    login
+    login,
+    modifyUser
 }

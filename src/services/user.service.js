@@ -42,8 +42,19 @@ const authentication = async (body) => {
     }
 }
 
+const modifyUser = async (body, id) => {
+    try {
+        const { name, lastName, email } = body
+        const data = await UserRepository.modifyUser(name, lastName, email, id)
+        return data
+    } catch (error) {
+        throw error
+    }
+}
+
 export const UserService = {
     getAllUser,
     createUser,
-    authentication
+    authentication,
+    modifyUser
 }
