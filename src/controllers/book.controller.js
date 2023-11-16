@@ -10,6 +10,26 @@ const getAllBooks = async (req, res, next) => {
     }
 }
 
+const createBook = async (req, res, next) => {
+    try {
+        await BookService.createBook(req.body)
+        return res.status(HTTP_STATUSES.CREATED).json({ msg: "Book created successfully" })
+    } catch (error) {
+        next(error)
+    }
+}
+
+const updateBook = async (req, res, next) => {
+    try {
+        await BookService.updateBook(req.body, req.params.id)
+        return res.status(HTTP_STATUSES.CREATED).json({ msg: "Book modified successfully" })
+    } catch (error) {
+        next(error)
+    }
+}
+
 export const BookController = {
-    getAllBooks
+    getAllBooks,
+    createBook,
+    updateBook
 }

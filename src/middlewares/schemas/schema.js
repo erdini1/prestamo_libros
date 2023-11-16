@@ -37,6 +37,12 @@ const messagePages = {
     "number.max": "The pages field should be at least 2000"
 }
 
+const messageSummary = {
+    "any.string": "This field is required",
+    "string.min": "Should have at least 2 characters",
+    "string.max": "Exceeded the maximum of 100 characters"
+}
+
 const messageBorrowDate = {
     "any.required": "The borrow date field is required",
     "date.base": "Invalid date format for borrow date"
@@ -61,6 +67,10 @@ export const Schemas = {
     // Book
     Pages: Joi.number().integer().min(100).max(2000).required().messages(messagePages),
     Status: Joi.string().valid(...Object.values(STATUS)).required(), //Ver si va
+    Summary: Joi.string().min(2).max(200).required().messages(messageSummary),
+    //BookUpdate
+    PagesUpdate: Joi.number().integer().min(100).max(2000).messages(messagePages),
+    SummaryUpdate: Joi.string().min(2).max(200).messages(messageSummary),
     // Loan
     BorrowDate: Joi.date().required().messages(messageBorrowDate),    //TODO: Agregar iso, ver bien
     ReturnDate: Joi.date().required().messages(messageReturnDate),
