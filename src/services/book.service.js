@@ -26,8 +26,21 @@ const updateBook = async (book, id) => {
     }
 }
 
+const deleteBook = async id => {
+    try {
+        const data = await BookRepository.deleteBook(id)
+        if (data == 0) {
+            throw new ApiError(HTTP_STATUSES.BAD_REQUEST, "Book not deleted")
+        }
+        return data
+    } catch (error) {
+        throw error
+    }
+}
+
 export const BookService = {
     getAllBooks,
     createBook,
-    updateBook
+    updateBook,
+    deleteBook
 }

@@ -24,8 +24,17 @@ const updateBook = async (title, author, genre, pages, summary, id) => {
     }, { where: { id } })
 }
 
+const deleteBook = async id => {
+    return await db.Book.destroy({
+        where: {
+            id
+        }
+    })
+}
+
 export const BookRepository = {
     getAllBooks,
     createBook,
-    updateBook
+    updateBook,
+    deleteBook
 }

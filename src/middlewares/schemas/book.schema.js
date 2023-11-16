@@ -19,4 +19,7 @@ export const schemaBook = {
         },
         id: Schemas.Id,
     }),
+    getOne: Joi.object().keys({
+        id: Schemas.Id
+    })
 }

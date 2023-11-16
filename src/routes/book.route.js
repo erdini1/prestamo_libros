@@ -6,5 +6,6 @@ const router = express.Router()
 router.get("", BookController.getAllBooks)
 router.post("", BookMiddleware.validateCreateBook, BookController.createBook)
 router.put("/:id", BookMiddleware.validateUpdateBook, BookController.updateBook)
+router.delete("/:id", BookMiddleware.validateIdBook, BookController.deleteBook)
 
 export default router
