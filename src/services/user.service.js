@@ -41,9 +41,7 @@ const authentication = async (body) => {
     const { email, password } = body;
     const data = await findUserByEmailAndPassword(email, password);
     const token = jwt.sign(
-      data,
-      process.env.JWT_KEY /* , { expiresIn: "1h" } */,
-    );
+      data, process.env.JWT_KEY /* , { expiresIn: "1h" } */,);
     return token;
   } catch (error) {
     throw error;

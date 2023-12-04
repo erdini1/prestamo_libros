@@ -38,12 +38,10 @@ app.use((req, res, next) => {
       message: `The requested resource ${req.originalUrl} was not found`,
     }),
   );
-  res
-    .status(HTTP_STATUSES.NOT_FOUND)
-    .json({
-      status: HTTP_STATUSES.NOT_FOUND,
-      message: "The requested resource was not found",
-    });
+  res.status(HTTP_STATUSES.NOT_FOUND).json({
+    status: HTTP_STATUSES.NOT_FOUND,
+    message: "The requested resource was not found",
+  });
 });
 
 app.use((err, req, res, next) => {
@@ -59,11 +57,9 @@ app.use((err, req, res, next) => {
         message: err.message,
       }),
     );
-    res
-      .status(HTTP_STATUSES.INTERNAL_SERVER_ERROR)
-      .json({
-        status: HTTP_STATUSES.INTERNAL_SERVER_ERROR,
-        error: err.message,
-      });
+    res.status(HTTP_STATUSES.INTERNAL_SERVER_ERROR).json({
+      status: HTTP_STATUSES.INTERNAL_SERVER_ERROR,
+      error: err.message,
+    });
   }
 });

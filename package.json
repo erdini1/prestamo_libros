@@ -9,6 +9,11 @@
     "start": "nodemon ./bin/www",
     "format": "prettier --write ."
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run format"
+    }
+  },
   "author": "Dylan Erdini",
   "license": "ISC",
   "devDependencies": {
