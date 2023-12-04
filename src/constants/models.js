@@ -1,3 +1,3 @@
-export const ROLES = ["ADMIN", "USER"]
+export const ROLES = ["ADMIN", "USER"];
 
-export const STATUS = ['Available', 'Borrowed']
+export const STATUS = ["Available", "Borrowed"];
