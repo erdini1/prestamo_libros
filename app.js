@@ -10,6 +10,10 @@ import ApiError from "./src/errors/api.error.js";
 import http from "http";
 import { Server } from "socket.io";
 
+import swaggerUi from "swagger-ui-express";
+import YAML from "yamljs";
+const swaggerDocs = YAML.load("./src/docs/index.yaml");
+
 try {
   // db.sequelize.authenticate();
   console.log("Connection has been established successfully.");
@@ -52,6 +56,12 @@ app.use(express.json());
 // Indico el prefijo de la api
 const API_ENDPOINT = process.env.API_ENDPOINT;
 app.use(API_ENDPOINT, indexRouter);
+
+var options = {
+  explorer: true,
+};
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs, options));
 
 app.use((req, res, next) => {
   error(

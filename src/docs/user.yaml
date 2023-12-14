@@ -1,0 +1,7 @@
+paths:
+  /users:
+    get:
+      summary: Lista de usuarios
+      responses:
+        '200':
+          description: Respuesta exitosa

@@ -1,0 +1,7 @@
+paths:
+  /books:
+    get:
+      summary: Lista de libros
+      responses:
+        '200':
+          description: Respuesta exitosa

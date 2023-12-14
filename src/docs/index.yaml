@@ -1,0 +1,20 @@
+openapi: 3.0.0
+info:
+  version: "1.0.0"
+  title: Alkemy_library
+  description: Api
+
+servers:
+  - description: Servidor local
+    url: localhost:3000
+
+paths:
+  /users:
+    get:
+      summary: Lista de usuarios
+      responses:
+        '200':
+          description: Respuesta exitosa
+  # /users:
+  #   get:
+  #     $ref: 'user.yaml'
