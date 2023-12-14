@@ -1,4 +1,6 @@
 import { BookRepository } from "../repositories/book.respository.js";
+import ApiError from "../errors/api.error.js";
+import { HTTP_STATUSES } from "../constants/http.js";
 
 const getAllBooks = async () => {
   return await BookRepository.getAllBooks();

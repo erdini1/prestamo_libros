@@ -7,6 +7,9 @@ import { error, info } from "./src/log/logger.js";
 import { HTTP_STATUSES } from "./src/constants/http.js";
 import ApiError from "./src/errors/api.error.js";
 
+import http from "http";
+import { Server } from "socket.io";
+
 try {
   // db.sequelize.authenticate();
   console.log("Connection has been established successfully.");
@@ -19,6 +22,25 @@ try {
 }
 
 const app = express();
+const server = http.createServer(app);
+const io = new Server(server);
+
+io.on("connection", (socket) => {
+  console.log(`Usuario conectado`);
+  // console.log(socket);
+
+  socket.on("chat message", (msg) => {
+    // console.log(msg);
+    console.log(`Mensaje recibido de ${msg.sender}: ${msg.text}`);
+
+    io.emit("chat message", msg);
+  });
+
+  socket.on("disconnect", () => {
+    console.log(`Usuario desconectado`);
+  });
+});
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
@@ -36,7 +58,7 @@ app.use((req, res, next) => {
     JSON.stringify({
       status: HTTP_STATUSES.NOT_FOUND,
       message: `The requested resource ${req.originalUrl} was not found`,
-    }),
+    })
   );
   res.status(HTTP_STATUSES.NOT_FOUND).json({
     status: HTTP_STATUSES.NOT_FOUND,
@@ -55,7 +77,7 @@ app.use((err, req, res, next) => {
       JSON.stringify({
         status: HTTP_STATUSES.INTERNAL_SERVER_ERROR,
         message: err.message,
-      }),
+      })
     );
     res.status(HTTP_STATUSES.INTERNAL_SERVER_ERROR).json({
       status: HTTP_STATUSES.INTERNAL_SERVER_ERROR,

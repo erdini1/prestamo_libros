@@ -3,12 +3,14 @@ import { ROLES, STATUS } from "../../constants/models.js";
 
 const messageId = {
   "any.string": "For editing, the ID is required",
+  "string.required": "The ID is required",
   "string.min": "Should have at least 35 characters",
   "string.max": "Exceeded the maximum of 36 characters",
 };
 
 const messageString = {
-  "any.string": "This field is required",
+  "any.string": "Must be a string",
+  "any.required": "This field is required",
   "string.min": "Should have at least 2 characters",
   "string.max": "Exceeded the maximum of 30 characters",
 };

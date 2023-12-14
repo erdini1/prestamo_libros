@@ -26,7 +26,7 @@ const findUserByEmailAndPassword = async (email, password) => {
       throw new ApiError(HTTP_STATUSES.UNAUTHORIZED, "Invalid Credentials");
     const isPasswordValid = await PasswordUtil.comparePasswords(
       password,
-      user.password,
+      user.password
     );
     if (!isPasswordValid)
       throw new ApiError(HTTP_STATUSES.UNAUTHORIZED, "Invalid Credentials");
@@ -42,7 +42,8 @@ const authentication = async (body) => {
     const data = await findUserByEmailAndPassword(email, password);
     const token = jwt.sign(
       data,
-      process.env.JWT_KEY /* , { expiresIn: "1h" } */,);
+      process.env.JWT_KEY /* , { expiresIn: "1h" } */
+    );
     return token;
   } catch (error) {
     throw error;
